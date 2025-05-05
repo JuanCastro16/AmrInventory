@@ -1,0 +1,184 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: #ffffff;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.header-logo {
+  width: 100px;
+  height: auto;
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la pantalla */
+  background-color: rgb(44, 97, 177, 0.43);
+}
+
+.section-login {
+  width: 100%;
+  max-width: 800px;
+  height: 90%;
+  max-height: 800px; /* Limita el ancho máximo del artículo */
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around; /* Distribuye el espacio */
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  max-height: 800px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.form-header h1 {
+  font-size: 40px;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form-header spam {
+  font-size: 20px;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+}
+
+.input-container {
+  width: 100%;
+  text-align: center;
+}
+
+.input-password,
+.input-user {
+  width: 70%;
+  padding: 15px;
+  margin: 15px 0;
+  font-size: 15px;
+  border: 1px solid #cccccc73;
+  border-radius: 5px;
+  background-color: rgba(223, 223, 223, 0.7);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.input-user {
+  margin-bottom: 3rem; /* Espacio adicional para el campo de usuario */
+}
+
+.form-login button {
+  width: 25%;
+  padding: 13px;
+  background-color: #2c61b1;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 3rem; /* Empuja el botón hacia abajo */
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.5);
+}
+
+.form-login button:hover {
+  background-color: #1a4d8f;
+}
+
+.form-login button:active {
+  background-color: #1a4d8f;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+}
+
+@media (min-width: 300px) and (max-width: 470px) {
+  .section-login {
+    width: 80%;
+    max-width: 800px;
+    height: 70%;
+    max-height: 800px; /* Limita el ancho máximo del artículo */
+  }
+
+  .form-header h1 {
+    font-size: 30px;
+  }
+
+  .form-header spam {
+    font-size: 15px;
+  }
+
+  .input-password,
+  .input-user {
+    width: 80%;
+    padding: 13px;
+    margin: 10px 0;
+    font-size: 13px;
+  }
+
+  .input-user {
+    margin-bottom: 2rem; /* Espacio adicional para el campo de usuario */
+  }
+
+  .form-login button {
+    width: 60%;
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 1300px) {
+  .section-login {
+    width: 70%;
+    max-width: 800px;
+    height: 80%;
+    max-height: 800px; /* Limita el ancho máximo del artículo */
+  }
+
+  .form-header h1 {
+    font-size: 40px;
+  }
+
+  .form-header spam {
+    font-size: 20px;
+  }
+
+  .input-password,
+  .input-user {
+    width: 80%;
+    padding: 13px;
+    margin: 10px 0;
+    font-size: 15px;
+  }
+
+  .input-user {
+    margin-bottom: 2.5rem; /* Espacio adicional para el campo de usuario */
+  }
+
+  .form-login button {
+    width: 40%;
+    padding: 13px;
+    font-size: 16px;
+  }
+}

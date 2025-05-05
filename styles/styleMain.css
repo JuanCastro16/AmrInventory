@@ -1,0 +1,408 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Inter", sans-serif;
+  height: 100%;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  height: 91.05%; /* Ocupa toda la pantalla */
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: white;
+  padding: 10px;
+}
+
+header img {
+  width: 100px;
+  height: auto;
+}
+
+.header-logo {
+  padding-left: 10px;
+}
+
+.title-header {
+  flex-grow: 1;
+  text-align: center;
+  color: #000000;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Navegacion */
+.nav-header {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(44, 97, 177, 0.43);
+}
+
+.user-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0 3rem 0;
+}
+
+.user-header img {
+  width: 100px;
+  margin-left: 1rem;
+  border-radius: 100%;
+}
+
+.user-header h2 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.user-header span {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.nav-producto {
+  align-self: center;
+  width: 75%;
+  margin-bottom: 5rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 20px;
+  background-color: #2c61b1;
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.nav-producto a {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.nav-producto span {
+  margin-right: 0.5rem;
+  font-style: bold;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.5rem;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding: 15px;
+  color: #000000;
+  border-radius: 12px;
+  background-color: #fffefe;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+  transition: width 2s;
+  cursor: pointer;
+}
+
+.nav-li:nth-child(1) {
+  padding: 15px;
+  color: #000000;
+  border-radius: 15px;
+  background-color: #a4a4a4;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-li:hover {
+  background-color: #a4a4a4;
+  transition: all .5s;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-li img {
+  margin-left: 1rem;
+  width: 25px;
+}
+
+.nav-li a {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Tabla de Productos */
+.table-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px 0 30px;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 1.3rem;
+  width: 100%;
+}
+th,
+td {
+  border: 2px solid #000;
+  padding: 1.3rem;
+  text-align: center;
+}
+
+th {
+  background-color: rgb(44, 97, 177, 0.43);
+}
+
+td {
+  background-color: #f2f2f2;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.pagination span {
+  padding: 1rem;
+}
+
+.pagination button {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #000;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#pagina-actual {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.btn {
+  margin-right: 5px;
+  padding: 4px 8px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.btn-edit {
+  padding: 15px;
+  font-size: 1.2rem;
+  margin-right: 2rem;
+  background-color: #eccb11;
+  border: none;
+  border-radius: 8px;
+}
+
+.btn-delete {
+  padding: 15px;
+  font-size: 1.2rem;
+  background-color: #df1212;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4); 
+  transition: background-color 0.3s ease;
+}
+
+
+.modal-contenido {
+  background-color: #ffffff;
+  padding: 4rem;
+  border-radius: 10px;
+  width: 500px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-contenido h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.modal-contenido p {
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+
+.modal-botones {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal-botones button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#confirmar-eliminar {
+  font-size: 1rem;
+  background-color: #df1212;
+  color: white;
+}
+
+#cancelar-eliminar {
+  font-size: 1rem;
+  background-color: #ccc;
+}
+
+/* Media Querys */
+@media (min-width: 558px) and (max-width: 1920px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    height: 83.7%; /* Ocupa toda la pantalla */
+  }
+
+  /* Navegacion */
+  .user-header img {
+    width: 80px;
+    margin-left: 0.5rem;
+  }
+
+  .user-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .user-header span {
+    font-size: 1.18rem;
+  }
+
+  .nav-producto {
+    width: 80%;
+    margin-bottom: 2.5rem;
+    border-radius: 15px;
+  }
+
+  .nav-producto a {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .nav-producto span {
+    font-size: 1.2rem;
+  }
+
+  .nav-ul {
+    padding-top: 0;
+    gap: 1.3rem;
+  }
+
+  .nav-li {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .nav-li:nth-child(1) {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .nav-li img {
+    margin-left: 0.5rem;
+    width: 20px;
+  }
+
+  .nav-li a {
+    margin-left: 0.7rem;
+    font-size: 1.2rem;
+  }
+
+  /* Tabla de Productos */
+  .table-content {
+    margin: 0 20px 0 20px;
+  }
+
+  table {
+    font-size: 1.2rem;
+  }
+
+  th,
+  td {
+    padding: 1rem;
+  }
+
+  .pagination { 
+    margin-top: 20px;
+  }
+
+  .pagination span {
+    padding: .7rem;
+  }
+
+  .pagination button {
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    margin-right: 0;
+  }
+
+  #pagina-actual {
+    font-weight: 500;;
+    font-size: 1.1rem;
+  }
+
+  .btn-edit {
+    padding: 7px 10px 7px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    background-color: #ffd700;
+  }
+
+  .btn-delete {
+    padding: 7px 10px 7px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+}

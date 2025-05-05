@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="/assets//img/LogoFavicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/styles/styleAgPrdts.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>AMR TEXTIL</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-logo">
+        <img class="logo" src="assets/img/Logo.png" alt="AMR Textil Logo" />
+      </div>
+      <div class="title-header">
+        <h1>AMR TEXTIL</h1>
+        <span>INVENTORY</span>
+      </div>
+    </header>
+    <main>
+      <div class="nav-header">
+        <div class="user-header">
+          <img src="/assets/img/Logo-User.jpg" alt="Foto del Usuario" />
+          <div class="user-title">
+            <h2>AMR Textil</h2>
+            <span>Administridor</span>
+          </div>
+        </div>
+        <nav class="nav-bar">
+          <div class="nav-producto">
+            <a href="#"><span>+</span> Producto</a>
+          </div>
+          <ul class="nav-ul">
+            <li class="nav-li">
+              <img src="/assets/img/home.png" alt="Imagen de Inicio" /><a
+                href="main.html"
+                >Inicio</a
+              >
+            </li>
+            <li class="nav-li">
+              <img
+                src="/assets/img/category.png"
+                alt="Imagen de Categorias"
+              /><a href="/Categorias.html">Categorias</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="form-content">
+        <div class="form-title">
+          <h1 id="titulo-formulario">Producto Nuevo</h1>
+        </div>
+        <div id="mensaje-exito">¡Producto agregado correctamente!</div>
+        <form id="form-producto" class="form-inputs">
+          <label for="producto">Nombre del producto <span>*</span></label>
+          <input type="text" id="producto" required />
+          <label for="codigo">Identificacion del Producto <span>*</span></label>
+          <input type="text" id="codigo" required />
+          <label for="marca">Marca <span>*</span></label>
+          <input type="text" id="marca" required />
+          <label for="categoria">Categoria <span>*</span></label>
+          <input type="text" id="categoria" required />
+          <label for="stock">Unidades <span>*</span></label>
+          <input type="number" id="stock" required />
+          <label for="precio">Precio <span>*</span></label>
+          <input type="number" id="precio" required />
+          <div class="form-botones">
+            <button type="submit" id="btn-guardar">Agregar</button>
+            <button type="button" id="btn-cancelar">Cancelar</button>
+          </div>
+        </form>
+      </div>
+      <!-- Modal de Confirmación -->
+      <div id="modal-cancelar" class="modal">
+        <div class="modal-contenido">
+          <h2>¿Quieres cancelar edición?</h2>
+          <p>Se perderán los cambios no guardados.</p>
+          <div class="modal-botones">
+            <button id="confirmar-cancelar">Sí, cancelar</button>
+            <button id="cerrar-modal">Volver</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="JS/Formulario.js"></script>
+  </body>
+</html>
