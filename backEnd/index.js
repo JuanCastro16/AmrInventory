@@ -1,26 +1,108 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
-const app = express(); // la constante app tendrá ahora todo el funcionamiento del servidor
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const mongoose = require("./dataBase"); // no se quiere todo el archivo sino la conexión
+// Conexión a MongoDB
+mongoose
+  .connect("mongodb://localhost:27017/inventarios", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ Conectado a MongoDB"))
+  .catch((err) => console.error("❌ Error de conexión a MongoDB:", err));
 
-/** * Se crea una REST API, es la manera de decirle al servidor que reciba y envíe datos */
+// Middleware global
+app.use(morgan("dev"));
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
 
-// Configuraciones
-app.set("port", process.env.PORT || 3000); // Se establece el puerto por defecto o el 3000
-app.use(morgan("dev")); // Se establece el formato de los logs
+// Esquema y modelo de Producto
+const productoSchema = new mongoose.Schema({
+  producto: String,
+  codigo: String,
+  marca: String,
+  categoria: String,
+  stock: Number,
+  precio: Number,
+});
 
-app.use(express.json()); // método que ayuda a convertir el código para que el servidor pueda entender lo que viene del cliente.
+const Producto = mongoose.model("Producto", productoSchema);
 
-app.use(cors({ origin: "http://localhost:4200" })); // método para comunicar con el cliente
+// Rutas CRUD de productos
 
-// rutas de nuestro servidor
-app.use("/api/inventario", require("./routes/inventario.route")); // Se establece la ruta de la API, se le dice que use el archivo inventario.routes.js
+// Obtener todos los productos
+app.get("/api/productos", async (req, res) => {
+  try {
+    const productos = await Producto.find();
+    res.json(productos);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener los productos" });
+  }
+});
 
-app.listen(app.get("port"), () => {
-  // esta es una mejor manera de configurar el puerto
+// Agregar un nuevo producto
+app.post("/api/productos", async (req, res) => {
+  const { producto, codigo, marca, categoria, stock, precio } = req.body;
+  try {
+    const nuevoProducto = new Producto({
+      producto,
+      codigo,
+      marca,
+      categoria,
+      stock,
+      precio,
+    });
+    await nuevoProducto.save();
+    res
+      .status(201)
+      .json({
+        producto: nuevoProducto,
+      });
+  } catch (error) {
+    res.status(500).json({ error: "Error al agregar el producto" });
+  }
+});
 
-  console.log("Server activo en el puerto", app.get("port")); // Se establece el mensaje que se mostrará en la consola cuando el servidor esté corriendo
+// Editar un producto
+app.put("/api/productos/:id", async (req, res) => {
+  const { id } = req.params;
+  const { producto, codigo, marca, categoria, stock, precio } = req.body;
+  try {
+    const productoActualizado = await Producto.findByIdAndUpdate(
+      id,
+      { producto, codigo, marca, categoria, stock, precio },
+      { new: true }
+    );
+    res.json({
+      producto: productoActualizado,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error al editar el producto" });
+  }
+});
+
+// Eliminar un producto
+app.delete("/api/productos/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Producto.findByIdAndDelete(id);
+  } catch (error) {
+    res.status(500).json({ error: "Error al eliminar el producto" });
+  }
+});
+
+// Rutas adicionales (autenticación, inventario)
+const authRoutes = require("./routes/auth");
+app.use("/api", authRoutes);
+app.use("/api/inventario", require("./routes/inventario.route"));
+
+// Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });

@@ -140,7 +140,7 @@ header img {
 
 .nav-li:hover {
   background-color: #a4a4a4;
-  transition: all .5s;
+  transition: all 0.5s;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -183,31 +183,44 @@ td {
   background-color: #f2f2f2;
 }
 
-.pagination {
+#paginacion {
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   margin-top: 25px;
 }
 
-.pagination span {
+.paginacion span {
   padding: 1rem;
 }
 
-.pagination button {
+#paginacion button {
   font-size: 1rem;
   font-weight: 700;
   padding: 5px 10px;
-  margin-right: 5px;
-  border: 1px solid #000;
+  margin: 0 4px;
   background-color: #f2f2f2;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-#pagina-actual {
-  font-weight: 700;
-  font-size: 1.3rem;
+#paginacion button.activo {
+  background-color: #2C61B1;
+  color: white;
+}
+
+#numeros-pagina {
+  display: flex;
+}
+
+#numeros-pagina button {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+#numeros-pagina button:hover {
+  background-color: #2C61B1;
+  color: #fff;
 }
 
 .btn {
@@ -224,6 +237,7 @@ td {
   background-color: #eccb11;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .btn-delete {
@@ -233,7 +247,16 @@ td {
   border: none;
   color: white;
   border-radius: 8px;
+  cursor: pointer;
 }
+
+.btn-delete:hover {
+  background-color: #c00;
+}
+.btn-edit:hover {
+  background-color: #d4b10f;
+}
+
 
 /* Modal */
 .modal {
@@ -246,10 +269,9 @@ td {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4); 
+  background-color: rgba(0, 0, 0, 0.4);
   transition: background-color 0.3s ease;
 }
-
 
 .modal-contenido {
   background-color: #ffffff;
@@ -291,10 +313,23 @@ td {
   color: white;
 }
 
+#confirmar-eliminar:hover {
+  background-color: #c00;
+}
+
 #cancelar-eliminar {
   font-size: 1rem;
   background-color: #ccc;
 }
+#cancelar-eliminar:hover {
+  background-color: #aaa;
+}
+
+.input-error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
 
 /* Media Querys */
 @media (min-width: 558px) and (max-width: 1920px) {
@@ -372,23 +407,23 @@ td {
     padding: 1rem;
   }
 
-  .pagination { 
+  .pagination {
     margin-top: 20px;
   }
 
   .pagination span {
-    padding: .7rem;
+    padding: 0.7rem;
   }
 
   .pagination button {
-    font-size: .7rem;
+    font-size: 0.7rem;
     font-weight: 700;
     padding: 5px 10px;
     margin-right: 0;
   }
 
   #pagina-actual {
-    font-weight: 500;;
+    font-weight: 500;
     font-size: 1.1rem;
   }
 
@@ -403,6 +438,6 @@ td {
   .btn-delete {
     padding: 7px 10px 7px 10px;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 5px; 
   }
 }

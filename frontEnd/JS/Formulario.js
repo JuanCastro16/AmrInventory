@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "Guardar Cambios";
 
     // Guardamos el ID que se está editando en localStorage
-    localStorage.setItem("editandoId", productoEditar.id);
+    localStorage.setItem("editandoId", productoEditar._id);
   }
 });
 
 document
   .getElementById("form-producto")
-  .addEventListener("submit", function (e) {
+  .addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const producto = document.getElementById("producto").value;
@@ -36,49 +36,87 @@ document
     const stock = document.getElementById("stock").value;
     const precio = document.getElementById("precio").value;
 
-    const datos = JSON.parse(localStorage.getItem("productos")) || [];
-    const editandoId = parseInt(localStorage.getItem("editandoId"));
+    //const datos = JSON.parse(localStorage.getItem("productos")) || [];
+    //const editandoId = parseInt(localStorage.getItem("editandoId"));
+    const editandoId = localStorage.getItem("editandoId");
 
-    if (!producto || !codigo || !marca || !categoria || !stock || !precio) {
-      alert("Por favor complete todos los campos.");
+    const campos = [
+      { id: "producto", valor: producto },
+      { id: "codigo", valor: codigo },
+      { id: "marca", valor: marca },
+      { id: "categoria", valor: categoria },
+      { id: "stock", valor: stock },
+      { id: "precio", valor: precio },
+    ];
+
+    let camposValidos = true;
+
+    campos.forEach(({ id, valor }) => {
+      const input = document.getElementById(id);
+      if (!valor.trim()) {
+        input.classList.add("input-error");
+        camposValidos = false;
+      } else {
+        input.classList.remove("input-error");
+      }
+    });
+
+    if (!camposValidos) {
+      alert("Por favor complete todos los campos correctamente.");
       return;
     }
 
-    if (editandoId) {
-      const index = datos.findIndex((d) => d.id === editandoId);
-      if (index !== -1) {
-        datos[index] = {
-          id: editandoId,
-          producto,
-          codigo,
-          marca,
-          categoria,
-          stock,
-          precio,
-        };
+    const datosProducto = {
+      producto,
+      codigo,
+      marca,
+      categoria,
+      stock,
+      precio,
+    };
+
+    try {
+      const loader = document.getElementById("loader");
+      loader.classList.add("visible");
+
+      if (editandoId) {
+        // Actualizar producto en la base de datos
+        const response = await fetch(
+          `http://localhost:3000/api/productos/${editandoId}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datosProducto),
+          }
+        );
+        await response.json();
+      } else {
+        // Crear nuevo producto en la base de datos
+        const response = await fetch("http://localhost:3000/api/productos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datosProducto),
+        });
+        await response.json();
       }
-    } else {
-      datos.push({
-        id: datos.length ? datos[datos.length - 1].id + 1 : 1,
-        producto,
-        codigo,
-        marca,
-        categoria,
-        stock,
-        precio,
-      });
+
+      document.getElementById("form-producto").reset();
+      localStorage.removeItem("productoEditar");
+      localStorage.removeItem("editandoId");
+      // Mensaje de éxito
+      document.getElementById("mensaje-exito").style.display = "block";
+      setTimeout(() => {
+        window.location.href = "main.html?pagina=ultima";
+      }, 1000);
+    } catch (error) {
+      console.error("Error al guardar el producto:", error);
+      alert("Error al guardar el producto. Intente nuevamente.");
+    } finally {
+      loader.classList.remove("visible");
     }
-
-    localStorage.setItem("productos", JSON.stringify(datos));
-    document.getElementById("form-producto").reset();
-    localStorage.removeItem("productoEditar");
-    localStorage.removeItem("editandoId");
-
-    // Mensaje de éxito
-    document.getElementById("mensaje-exito").style.display = "block";
-    setTimeout(() => {}, 3000);
   });
 
+// Modal para cancelar la edición o creación de un producto
 const modal = document.getElementById("modal-cancelar");
 const btnCancelar = document.getElementById("btn-cancelar");
 const btnConfirmar = document.getElementById("confirmar-cancelar");
