@@ -57,6 +57,10 @@
         </nav>
       </div>
       <div class="table-content">
+        <div class="catTitle">
+          <span>Categoria:</span>
+          <h2 id="titulo-categoria">Todas</h2>
+        </div>
         <table id="tabla-productos">
           <thead>
             <tr>
@@ -65,8 +69,8 @@
               <th>CODIGO PRODUCTO</th>
               <th>MARCA</th>
               <th>CATEGORIA</th>
+              <th>UNIDADES</th>
               <th>PRECIO</th>
-              <th>STOCK</th>
               <th></th>
             </tr>
           </thead>
@@ -94,5 +98,18 @@
       </div>
     </main>
     <script src="JS/Tabla.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const categoria = params.get("categoria");
+
+        if (categoria) {
+          const tituloCategoria = document.getElementById("titulo-categoria");
+          if (tituloCategoria) {
+            tituloCategoria.textContent = categoria;
+          }
+        }
+      });
+    </script>
   </body>
 </html>

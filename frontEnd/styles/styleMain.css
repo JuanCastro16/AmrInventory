@@ -157,6 +157,21 @@ header img {
 }
 
 /* Tabla de Productos */
+.catTitle {
+  display: flex;
+
+}
+
+.table-content span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+}
+
+#titulo-categoria {
+  margin: 0 0 1.5rem 1rem;
+}	
+
 .table-content {
   display: flex;
   flex-direction: column;
@@ -432,6 +447,7 @@ td {
     font-size: 1rem;
     border-radius: 5px;
     margin-right: 1rem;
+    margin-bottom: 1rem;
     background-color: #ffd700;
   }
 

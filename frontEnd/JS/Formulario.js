@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  fetch("http://localhost:3000/api/categorias")
+    .then((res) => res.json())
+    .then((categorias) => {
+      const select = document.getElementById("categoria");
+      categorias.forEach((cat) => {
+        const option = document.createElement("option");
+        option.value = cat.nombre; // Asegúrate que tu modelo tiene este campo
+        option.textContent = cat.nombre;
+        select.appendChild(option);
+      });
+    })
+    .catch((error) => {
+      console.error("Error al cargar categorías desde el backend:", error);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.getItem("productoEditar")) {
     localStorage.removeItem("editandoId");
   }
@@ -23,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("editandoId", productoEditar._id);
   }
 });
+
+
 
 document
   .getElementById("form-producto")

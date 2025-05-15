@@ -22,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
+
 // Esquema y modelo de Producto
 const productoSchema = new mongoose.Schema({
   producto: String,
@@ -96,6 +97,10 @@ app.delete("/api/productos/:id", async (req, res) => {
     res.status(500).json({ error: "Error al eliminar el producto" });
   }
 });
+
+// Rutas de categorías
+const categoriasRoutes = require("./routes/categorias.routes");
+app.use("/api/categorias", categoriasRoutes);
 
 // Rutas adicionales (autenticación, inventario)
 const authRoutes = require("./routes/auth");
