@@ -61,7 +61,7 @@ function inicializarEventos() {
         }
 
         // ✅ Si llega aquí, todo fue bien
-        alert("Producto eliminado correctamente.");
+        mostrarMensajeTemporal("Producto eliminado correctamente.");
 
         // 🔄 Recargar tabla
         await cargarProductos().then(() => {
@@ -198,3 +198,14 @@ function mostrarPagina() {
 
   mostrarNumerosPagina(); // Mostrar los números de página
 }
+
+function mostrarMensajeTemporal(texto, duracion = 3000) {
+  const mensaje = document.getElementById("mensaje-temporal");
+  mensaje.textContent = texto;
+  mensaje.classList.add("mostrar");
+
+  setTimeout(() => {
+    mensaje.classList.remove("mostrar");
+  }, duracion);
+}
+

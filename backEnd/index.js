@@ -93,6 +93,8 @@ app.delete("/api/productos/:id", async (req, res) => {
   const { id } = req.params;
   try {
     await Producto.findByIdAndDelete(id);
+    // Respuesta clara al frontend
+    res.status(200).json({ mensaje: "Producto eliminado correctamente" });
   } catch (error) {
     res.status(500).json({ error: "Error al eliminar el producto" });
   }
