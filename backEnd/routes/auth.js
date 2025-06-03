@@ -20,4 +20,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post('/logout', (req, res) => {
+  // Aquí podrías eliminar un token de una lista negra o simplemente confirmar logout
+  res.status(200).json({ message: 'Sesión cerrada correctamente' });
+});
+
 module.exports = router;

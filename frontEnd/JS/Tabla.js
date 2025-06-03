@@ -209,3 +209,41 @@ function mostrarMensajeTemporal(texto, duracion = 3000) {
   }, duracion);
 }
 
+// Lógica para cerrar sesión con confirmación
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logout-button");
+  const modalLogout = document.getElementById("modal-logout");
+  const btnConfirmarLogout = document.getElementById("confirmar-logout");
+  const btnCancelarLogout = document.getElementById("cancelar-logout");
+
+  if (logoutBtn && modalLogout) {
+    logoutBtn.addEventListener("click", () => {
+      modalLogout.style.display = "flex";
+    });
+
+    btnCancelarLogout.addEventListener("click", () => {
+      modalLogout.style.display = "none";
+    });
+
+    btnConfirmarLogout.addEventListener("click", () => {
+      fetch("http://localhost:3000/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.message);
+          localStorage.removeItem("token"); // Si usas JWT
+          window.location.href = "index.html"; // Redirigir a login o home
+        })
+        .catch((err) => {
+          console.error("Error al cerrar sesión:", err);
+          window.location.href = "index.html"; // Redirige igual en caso de error
+        });
+    });
+  }
+});
+
+

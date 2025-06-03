@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
 // Conexión a MongoDB
 mongoose
   .connect("mongodb://localhost:27017/inventarios", {
